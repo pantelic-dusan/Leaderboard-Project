@@ -14,7 +14,7 @@ class Search extends React.Component {
         this.state = {
             scores: null
         }
-        this.username = "";
+        this.username = "Username";
         ScoresApi.getScores().then(scores => this.setState({scores:scores}))
 
     }
@@ -38,7 +38,7 @@ class Search extends React.Component {
             return (
                 <div className="scores-table">
                 <InputGroup size="md" ref="username" inside className="search-bar">
-                    <Input placeholder="Username" onChange={this.handleInput.bind(this)} onPressEnter={this.handleSearch.bind(this)}/>
+                    <Input placeholder={this.username} onChange={this.handleInput.bind(this)} onPressEnter={this.handleSearch.bind(this)}/>
                     <InputGroup.Button onClick={this.handleSearch.bind(this)}>
                         <Icon icon="search" />
                     </InputGroup.Button>

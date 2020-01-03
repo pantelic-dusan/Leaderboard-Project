@@ -29,6 +29,14 @@ class ScoresApi {
         );
     }
 
+    getScoresByDateRange(fromDate, toDate) {
+        return this.httpClient
+        .get("/scores/" + fromDate + '/' + toDate)
+        .then(response =>
+            response.data.map(res => this.parse(res))
+        );
+    }
+
     parse(response) {
         return {
             id: response._id,
