@@ -17,7 +17,9 @@ class Navigation extends React.Component {
     }
 
     handleSelect(eventKey) {
-        this.state.activeKey = eventKey
+        this.setState({
+            activeKey: eventKey
+        })
     }
 
     render () {
