@@ -14,14 +14,18 @@ class Search extends React.Component {
         this.state = {
             scores: null
         }
+        this.username = "";
         ScoresApi.getScores().then(scores => this.setState({scores:scores}))
-        
+
+    }
+
+    handleInput(value) {
+        this.username = value;
     }
 
     handleSearch() {
-        console.log(this.state)
-        this.setState({scores: null})
-        ScoresApi.getScoresByUsername('Guest').then(scores => this.setState({scores:scores}))
+        this.setState({scores: null});
+        ScoresApi.getScoresByUsername(this.username).then(scores => this.setState({scores:scores}));
     }
 
     render () {
@@ -33,15 +37,15 @@ class Search extends React.Component {
         } else {
             return (
                 <div className="scores-table">
-                <InputGroup size="md" inside className="search-bar">
-                    <Input placeholder="Username" onPressEnter={this.handleSearch.bind(this)}/>
+                <InputGroup size="md" ref="username" inside className="search-bar">
+                    <Input placeholder="Username" onChange={this.handleInput.bind(this)} onPressEnter={this.handleSearch.bind(this)}/>
                     <InputGroup.Button onClick={this.handleSearch.bind(this)}>
                         <Icon icon="search" />
                     </InputGroup.Button>
                 </InputGroup>
                 <ScoresTable data={this.state.scores} />
                 </div>
-                
+
             )
         }
     }
